@@ -48,7 +48,7 @@ async function categoryCreatePOST(req,res) {
 async function categoryUpdateGET(req,res) {
     const category = await categoryModel.listAllCat();
 
-    res.render("updateForm", {title: "Update Category", category});
+    res.render("updateCat", {title: "Update Category", category});
 }
 
 //POST - handle update form
