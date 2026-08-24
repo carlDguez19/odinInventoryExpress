@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
 const path = require("node:path");
-const categoryRouter = require("./routes/categoryRouter");
+const categoryRouter = require("./routes/categoryRouter.js");
+const itemRouter = require("./routes/itemRouter.js");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use("/", categoryRouter);
+app.use("/category", categoryRouter);
+app.use("/item", itemRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {

@@ -20,7 +20,7 @@ async function catList(req,res){
 }
 
 async function oneCatList(req,res) {
-    const categoryId = req.param.id;
+    const categoryId = req.params.id;
     const categoryData = await categoryModel.listOneCat(categoryId);
 
     if(categoryData.length === 0){
@@ -60,7 +60,8 @@ async function categoryCreatePOST(req,res) {
 
 //GET - show update form
 async function categoryUpdateGET(req,res) {
-    const category = await categoryModel.listAllCat();
+    const categoryId = req.params.id;
+    const categoryData = await categoryModel.listOneCat(categoryId);
 
     res.render("updateCat", {title: "Update Category", category});
 }
