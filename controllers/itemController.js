@@ -1,4 +1,4 @@
-const itemCategory = require("../models/itmQueries.js")
+const itemModel = require("../models/itmQueries.js")
 
 // Table: category
 // +--------+---------+--------------+
@@ -15,13 +15,13 @@ const itemCategory = require("../models/itmQueries.js")
 // | ...                                                   |
 
 async function itemList(req, res) {
-    const items = itemCategory.listAllItm();
+    const items = await itemModel.listAllItm();
     res.render("itmList", {items});
 }
 
 async function itemDetail(req,res) {
-    const item_id = req.param.id;
-    const itemDet = itemCategory.listItem(item_id);
+    const item_id = req.params.id;
+    const itemDet = await itemModel.listItem(item_id);
     res.render("itmDetail", {itemDet});
 }
 
@@ -37,12 +37,12 @@ async function itemCreatePOST(req,res) {
         category_id: req.body.category_id,
     }
 
-    const created = itemCategory.createItm(newItem);
+    const created = await itemModel.createItm(newItem);
     res.redirect(`/item/${created.id}`);
 }
 
 async function itemUpdateGET(req,res) {
-    const items = itemCategory.listAllItm()
+    const items = await itemModel.listAllItm()
     res.render("updateItem", {title: "Update Item", items});
 }
 
@@ -56,21 +56,26 @@ async function itemUpdatePOST(req,res) {
         category_id: req.body.category_id
     }
 
-    const updated = await itemCategory.updateItm(itemId, updatedItem);
+    const updated = await itemModel.updateItm(itemId, updatedItem);
     res.redirect(`/item/${updated.id}`);
 }
 
 async function itemDeleteGET(req,res) {
         const itemId = req.params.id;
-        const itemData = await itemCategory.listItem(itemId);
+        const itemData = await itemModel.listItem(itemId);
     
         res.render("itemDelete", {itemData});
 }
 
 async function itemDeletePOST(req,res) {
-    const itemId = req.params.id;
-    await itemCategory.deleteItm(itemId);
-    res.redirect("/item");
+    try{
+        const itemId = req.params.id;
+        await itemModel.deleteItm(itemId);
+        res.redirect("/item");
+    }catch (err){
+        console.error("Delete error: ", err);
+        res.status(500).send("Error deleting item");
+    }
 }
 
 module.exports = {
