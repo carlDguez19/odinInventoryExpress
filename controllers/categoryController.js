@@ -1,5 +1,19 @@
 const categoryModel = require("../models/catQueries.js");
 
+// Table: category
+// +--------+---------+--------------+
+// | id(pk) | name    | description  |
+// +--------+---------+--------------+
+// | 1      | potions | loremIpsum...|
+// | ...                             |
+
+// Table: item
+// +--------+---------+--------------+-------+-------------+
+// | id(pk) | name    | description  | price | category_id |
+// +--------+---------+--------------+-------+-------------+
+// | 1      | healing | loremIpsum...| 20g   | 1           |
+// | ...                                                   |
+
 async function catList(req,res){
     const items = await categoryModel.listAllCat();
     res.render("catList", {items});
@@ -73,7 +87,7 @@ async function categoryDeleteGET(req,res) {
 }
 
 //POST - handle delete
-async function categoryDeletePOST(params) {
+async function categoryDeletePOST(req,res) {
     const categoryId = req.params.id;
     await categoryModel.deleteCat(categoryId);
     res.redirect("/category");

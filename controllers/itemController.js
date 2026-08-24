@@ -1,5 +1,19 @@
 const itemCategory = require("../models/itmQueries.js")
 
+// Table: category
+// +--------+---------+--------------+
+// | id(pk) | name    | description  |
+// +--------+---------+--------------+
+// | 1      | potions | loremIpsum...|
+// | ...                             |
+
+// Table: item
+// +--------+---------+--------------+-------+-------------+
+// | id(pk) | name    | description  | price | category_id |
+// +--------+---------+--------------+-------+-------------+
+// | 1      | healing | loremIpsum...| 20g   | 1           |
+// | ...                                                   |
+
 async function itemList(req, res) {
     const items = itemCategory.listAllItm();
     res.render("itmList", {items});
@@ -44,4 +58,28 @@ async function itemUpdatePOST(req,res) {
 
     const updated = await itemCategory.updateItm(itemId, updatedItem);
     res.redirect(`/item/${updated.id}`);
+}
+
+async function itemDeleteGET(req,res) {
+        const itemId = req.params.id;
+        const itemData = await itemCategory.listItem(itemId);
+    
+        res.render("itemDelete", {itemData});
+}
+
+async function itemDeletePOST(req,res) {
+    const itemId = req.params.id;
+    await itemCategory.deleteItm(itemId);
+    res.redirect("/item");
+}
+
+module.exports = {
+    itemList,
+    itemDetail,
+    itemCreateGET,
+    itemCreatePOST,
+    itemUpdateGET,
+    itemUpdatePOST,
+    itemDeleteGET,
+    itemDeletePOST,
 }
