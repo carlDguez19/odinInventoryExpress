@@ -42,7 +42,8 @@ async function itemCreatePOST(req,res) {
 }
 
 async function itemUpdateGET(req,res) {
-    const items = await itemModel.listAllItm()
+    const item_id = req.params.id;
+    const itemDet = await itemModel.listItem(item_id);
     res.render("updateItem", {title: "Update Item", items});
 }
 
