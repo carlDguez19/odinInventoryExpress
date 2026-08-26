@@ -25,6 +25,16 @@ async function listItem(itemId) {
     return rows[0];
 }
 
+async function getItemsByCategory(catId) {
+    const {rows} = await pool.query(`
+        SELECT id, name, description, price
+        FROM item
+        WHERE category_id = $1
+        `, [catId]);
+
+        return rows;
+}
+
 async function createItm(newItm){
     const {rows} = await pool.query(`INSERT INTO item (name, description, price, category_id) VALUES ($1, $2, $3, $4) RETURNING *`, [newItm.name, newItm.description, newItm.price, newItm.category_id]);
     return rows[0];

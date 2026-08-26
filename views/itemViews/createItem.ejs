@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create Category</h1>
+    <form action="/createCat" method="POST">
+        <label for="itmName">Item Name: </label>
+        <input type="text" name="itmName" id="itmName" required>
+        <label for="itmDesc">Item Description: </label>
+        <textarea name="itmDesc" id="itmDesc"></textarea>
+        <label for="itmPrice">Item Price:</label>
+        <input type="number" name="itmPrice" id="itmPrice">
+        <label for="category_id">Category ID</label>
+        <select name="category_id" id="category_id" required>
+            <% categories.forEach(cat => { %>
+                <option value="<%= cat.id %>"><%= cat.name ></option>
+            <% }) %>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+<!-- // Table: category
+// +--------+---------+--------------+
+// | id(pk) | name    | description  |
+// +--------+---------+--------------+
+// | 1      | potions | loremIpsum...|
+// | ...                             |
+
+// Table: item
+// +--------+---------+--------------+-------+-------------+
+// | id(pk) | name    | description  | price | category_id |
+// +--------+---------+--------------+-------+-------------+
+// | 1      | healing | loremIpsum...| 20g   | 1           |
+// | ...                                                   | -->

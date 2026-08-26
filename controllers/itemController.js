@@ -1,4 +1,5 @@
 const itemModel = require("../models/itmQueries.js")
+const categoryModel = require("../models/catQueries.js")
 
 // Table: category
 // +--------+---------+--------------+
@@ -26,7 +27,8 @@ async function itemDetail(req,res) {
 }
 
 function itemCreateGET(req,res){
-    res.render("itemCreateForm", {title: "Create Item"});
+    const categories = await categoryModel.listAllCat();
+    res.render("itemCreateForm", {title: "Create Item", categories});
 }
 
 async function itemCreatePOST(req,res) {

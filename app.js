@@ -7,6 +7,9 @@ const itemRouter = require("./routes/itemRouter.js");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.get("/", (req, res) => {
+  res.render("home");
+});
 app.use("/category", categoryRouter);
 app.use("/item", itemRouter);
 

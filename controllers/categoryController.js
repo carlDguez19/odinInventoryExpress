@@ -1,4 +1,5 @@
 const categoryModel = require("../models/catQueries.js");
+const itemModel = require("../models/itmQueries.js");
 
 // Table: category
 // +--------+---------+--------------+
@@ -21,23 +22,9 @@ async function catList(req,res){
 
 async function oneCatList(req,res) {
     const categoryId = req.params.id;
+
     const categoryData = await categoryModel.listOneCat(categoryId);
-
-    if(categoryData.length === 0){
-        return res.render("categoryDetail", {category: null, items: []});
-    }
-
-    const category = {
-        name: categoryData[0].cat_name,
-        description: categoryData[0].cat_desc,
-    };
-
-    const items = categoryData.map(row => ({
-        id: row.item_id,
-        name: row.item_name,
-        description: row.item_desc,
-        price: row.item_price,
-    }));
+    const items = await itemModel.getItemsByCategory(categoryId);
 
     res.render("categoryDetail", {category, items});
 }

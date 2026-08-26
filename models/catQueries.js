@@ -20,17 +20,12 @@ async function listAllCat(){
 }
 
 async function listOneCat(catId){
-    const {rows} = await pool.query(`SELECT 
-        category.name AS cat_name,
-        category.description AS cat_desc,
-        item.id AS item_id,
-        item.name AS item_name,
-        item.description AS item_desc
-        item.price AS item_price
-        FROM item JOIN category ON (category.id = item.category_id)
-        WHERE category.id = $1`, [catId]);
+    const {rows} = await pool.query(`
+        SELECT id, name, description
+        FROM category
+        WHERE id = $1`, [catId]);
     
-    return rows;
+    return rows[0];
 }
 
 async function createCat(newCat){
