@@ -16,8 +16,8 @@ const itemModel = require("../models/itmQueries.js");
 // | ...                                                   |
 
 async function catList(req,res){
-    const items = await categoryModel.listAllCat();
-    res.render("catList", {items});
+    const categories = await categoryModel.listAllCat();
+    res.render("catList", {categories});
 }
 
 async function oneCatList(req,res) {
@@ -48,7 +48,7 @@ async function categoryCreatePOST(req,res) {
 //GET - show update form
 async function categoryUpdateGET(req,res) {
     const categoryId = req.params.id;
-    const categoryData = await categoryModel.listOneCat(categoryId);
+    const category = await categoryModel.listOneCat(categoryId);
 
     res.render("updateCat", {title: "Update Category", category});
 }

@@ -8,8 +8,12 @@
 <body>
     <h1>Delete Category</h1>
 
-    <p>Are you sure you want to delete "<%= categoryData.cat_name%>"?</p>
+    <p>Are you sure you want to delete "<%= categoryData.name%>"?</p>
     
-    <form action="/category/<%= categoryData.%>"></form>
+    <form action="/category/<%= categoryData.id %>/delete" method="POST">
+        <button type="submit">Yes</button>
+    </form>
+
+    <a href="/category"><button>Cancel</button></a>
 </body>
 </html>
