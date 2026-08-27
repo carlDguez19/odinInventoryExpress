@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>All Categories</h1>
+
+    <a href="/category/create">Create New Category</a>
+
+    <ul>
+        <% categories.forEach(cat => { %>
+            <li>
+                <strong><%= cat.name %></strong> - <%= cat.description %>
+
+                <a class="btnSmall" href="/category/<%= cat.id %>">Detail</a>
+                <a class="btnSmall" href="/category/<%= cat.id/update %>">Update</a>
+                <a class="btnSmall" href="/category/<%= cat.id/delete %>">Delete</a>
+
+            </li>
+        <% }) %>
+    </ul>
+
+    <a href="/item">Back to Items</a>
+</body>
+</html>

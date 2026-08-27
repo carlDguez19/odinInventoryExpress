@@ -17,7 +17,7 @@ const itemModel = require("../models/itmQueries.js");
 
 async function catList(req,res){
     const categories = await categoryModel.listAllCat();
-    res.render("catList", {categories});
+    res.render("catHome", {categories});
 }
 
 async function oneCatList(req,res) {
@@ -26,7 +26,7 @@ async function oneCatList(req,res) {
     const categoryData = await categoryModel.listOneCat(categoryId);
     const items = await itemModel.getItemsByCategory(categoryId);
 
-    res.render("categoryDetail", {category, items});
+    res.render("catDetail", {category, items});
 }
 
 //GET - show create form

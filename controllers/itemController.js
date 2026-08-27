@@ -17,7 +17,7 @@ const categoryModel = require("../models/catQueries.js")
 
 async function itemList(req, res) {
     const items = await itemModel.listAllItm();
-    res.render("itmList", {items});
+    res.render("itmHome", {items});
 }
 
 async function itemDetail(req,res) {
