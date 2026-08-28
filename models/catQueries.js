@@ -21,7 +21,7 @@ async function listAllCat(){
 
 async function listOneCat(catId){
     const {rows} = await pool.query(`
-        SELECT id, name, description
+        SELECT *
         FROM category
         WHERE id = $1`, [catId]);
     

@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1><%= itemDet.name %></h1>
+    <p><%= itemDet.description %></p>
+    <h2>Price: <%= itemDet.price %> gold</h2>
+    <h3>Category ID: <%= itemDet.category_id%></h3>
+
+    <a class="btnSmall" href="/item">Back to items</a>
+    <a class="btnSmall" href="/category/<%= itemDet.category_id %>">View category</a>
 </body>
 </html>

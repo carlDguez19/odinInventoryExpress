@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <h1>Update Item</h1>
+
+    <form action="/item/<%= item.id%>/update">
+        <label for="itmName">Item Name: </label>
+        <input type="text" name="itmName" id="itmName" value="<%= item.name%>" required>
+        <label for="itmDesc">Item Description: </label>
+        <textarea name="itmDesc" id="itmDesc"><%= item.description %></textarea>
+        <label for="itmPrice">Item Price:</label>
+        <input type="number" name="itmPrice" id="itmPrice" value="<%= item.price %>">
+        <label for="category_id">Category ID</label>
+        <select name="category_id" id="category_id" required>
+            <% categories.forEach(cat => { %>
+                <option value="<%= cat.id %>"
+                    <%= cat.id === item.category_id ? "selected" : "" %>>
+                    <%= cat.name %>
+                </option>
+            <% }) %>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

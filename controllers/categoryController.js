@@ -70,6 +70,13 @@ async function categoryUpdatePOST(req,res) {
 async function categoryDeleteGET(req,res) {
     const categoryId = req.params.id;
     const categoryData = await categoryModel.listOneCat(categoryId);
+    const items = await itemModel.getItemsByCategory(categoryId);
+
+    if(items.length > 0){
+        return res.render("categoryDeleteBlocked", {
+            message: "This category has items and cannot be deleted."
+        });
+    }
 
     res.render("categoryDelete", {categoryData});
 }
@@ -77,8 +84,14 @@ async function categoryDeleteGET(req,res) {
 //POST - handle delete
 async function categoryDeletePOST(req,res) {
     const categoryId = req.params.id;
-    await categoryModel.deleteCat(categoryId);
-    res.redirect("/category");
+    try{
+        await categoryModel.deleteCat(categoryId);
+        res.redirect("/category");
+    }catch(err){
+        res.render("categoryDeleteBlocked", {
+            message: "Cannot delete this caategory because items are still assigned to it."
+        })
+    }
 }
 
 module.exports = {

@@ -27,7 +27,7 @@ async function itemDetail(req,res) {
 }
 
 function itemCreateGET(req,res){
-    const categories = await categoryModel.listAllCat();
+    const categories = categoryModel.listAllCat();
     res.render("itemCreateForm", {title: "Create Item", categories});
 }
 
@@ -45,8 +45,9 @@ async function itemCreatePOST(req,res) {
 
 async function itemUpdateGET(req,res) {
     const item_id = req.params.id;
-    const itemDet = await itemModel.listItem(item_id);
-    res.render("updateItem", {title: "Update Item", items});
+    const item = await itemModel.listItem(item_id);
+    const categories = await categoryModel.listAllCat();
+    res.render("updateItem", {title: "Update Item", item, categories});
 }
 
 async function itemUpdatePOST(req,res) {
