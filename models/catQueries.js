@@ -46,3 +46,11 @@ async function deleteCat(catId) {
     const{rows} = await pool.query(`DELETE FROM category WHERE category.id = $1 RETURNING *`, [catId]);
     return rows[0];
 }
+
+module.exports = {
+    listAllCat,
+    listOneCat,
+    createCat,
+    updateCat,
+    deleteCat
+};

@@ -6,12 +6,12 @@ const categoryRouter = Router();
 //list all categories
 categoryRouter.get("/", categoryController.catList);
 
-//list one category in detail
-categoryRouter.get("/:id", categoryController.oneCatList);
-
 //create category
 categoryRouter.get("/create", categoryController.categoryCreateGET);
 categoryRouter.post("/create", categoryController.categoryCreatePOST);
+
+//list one category in detail
+categoryRouter.get("/:id", categoryController.oneCatList);
 
 //update category
 categoryRouter.get("/:id/update", categoryController.categoryUpdateGET);

@@ -8,13 +8,13 @@
 <body>
     <h1>Update Item</h1>
 
-    <form action="/item/<%= item.id%>/update">
+    <form action="/item/<%= item.id%>/update" method="POST">
         <label for="itmName">Item Name: </label>
-        <input type="text" name="itmName" id="itmName" value="<%= item.name%>" required>
+        <input type="text" name="name" id="itmName" value="<%= item.name%>" required>
         <label for="itmDesc">Item Description: </label>
-        <textarea name="itmDesc" id="itmDesc"><%= item.description %></textarea>
+        <textarea name="description" id="itmDesc"><%= item.description %></textarea>
         <label for="itmPrice">Item Price:</label>
-        <input type="number" name="itmPrice" id="itmPrice" value="<%= item.price %>">
+        <input type="number" name="price" id="itmPrice" value="<%= item.price %>">
         <label for="category_id">Category ID</label>
         <select name="category_id" id="category_id" required>
             <% categories.forEach(cat => { %>
@@ -26,6 +26,8 @@
         </select>
         <button type="submit">Submit</button>
     </form>
+
+    <a href="/item">Cancel</a>
 
 </body>
 </html>

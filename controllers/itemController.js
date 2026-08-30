@@ -17,18 +17,18 @@ const categoryModel = require("../models/catQueries.js")
 
 async function itemList(req, res) {
     const items = await itemModel.listAllItm();
-    res.render("itmHome", {items});
+    res.render("itemViews/itmHome", {items});
 }
 
 async function itemDetail(req,res) {
     const item_id = req.params.id;
     const itemDet = await itemModel.listItem(item_id);
-    res.render("itmDetail", {itemDet});
+    res.render("itemViews/itmDetail", {itemDet});
 }
 
-function itemCreateGET(req,res){
-    const categories = categoryModel.listAllCat();
-    res.render("itemCreateForm", {title: "Create Item", categories});
+async function itemCreateGET(req,res){
+    const categories = await categoryModel.listAllCat();
+    res.render("itemViews/createItem", {title: "Create Item", categories});
 }
 
 async function itemCreatePOST(req,res) {
@@ -47,7 +47,7 @@ async function itemUpdateGET(req,res) {
     const item_id = req.params.id;
     const item = await itemModel.listItem(item_id);
     const categories = await categoryModel.listAllCat();
-    res.render("updateItem", {title: "Update Item", item, categories});
+    res.render("itemViews/updateItem", {title: "Update Item", item, categories});
 }
 
 async function itemUpdatePOST(req,res) {
@@ -68,7 +68,7 @@ async function itemDeleteGET(req,res) {
         const itemId = req.params.id;
         const itemData = await itemModel.listItem(itemId);
     
-        res.render("itemDelete", {itemData});
+        res.render("itemViews/deleteItem", {itemData});
 }
 
 async function itemDeletePOST(req,res) {

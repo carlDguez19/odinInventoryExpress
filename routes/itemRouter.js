@@ -6,12 +6,12 @@ const itemRouter = Router();
 // list all items
 itemRouter.get("/", itemController.itemList);
 
-// list one
-itemRouter.get("/:id", itemController.itemDetail);
-
 //create item
 itemRouter.get("/create", itemController.itemCreateGET);
 itemRouter.post("/create", itemController.itemCreatePOST);
+
+// list one
+itemRouter.get("/:id", itemController.itemDetail);
 
 //update item
 itemRouter.get("/:id/update", itemController.itemUpdateGET);

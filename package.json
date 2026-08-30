@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/carlDguez19/odinInventoryExpress/issues"
   },
-  "homepage": "https://github.com/carlDguez19/odinInventoryExpress#readme"
+  "homepage": "https://github.com/carlDguez19/odinInventoryExpress#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
 }

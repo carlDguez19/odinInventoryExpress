@@ -17,21 +17,21 @@ const itemModel = require("../models/itmQueries.js");
 
 async function catList(req,res){
     const categories = await categoryModel.listAllCat();
-    res.render("catHome", {categories});
+    res.render("categoryViews/catHome", {categories});
 }
 
 async function oneCatList(req,res) {
     const categoryId = req.params.id;
 
-    const categoryData = await categoryModel.listOneCat(categoryId);
+    const category = await categoryModel.listOneCat(categoryId);
     const items = await itemModel.getItemsByCategory(categoryId);
 
-    res.render("catDetail", {category, items});
+    res.render("categoryViews/catDetail", {category, items});
 }
 
 //GET - show create form
 function categoryCreateGET(req,res){
-    res.render("categoryForm", {title: "Create Category"});
+    res.render("categoryViews/createCategory", {title: "Create Category"});
 }
 
 //POST - handle create form
@@ -50,7 +50,7 @@ async function categoryUpdateGET(req,res) {
     const categoryId = req.params.id;
     const category = await categoryModel.listOneCat(categoryId);
 
-    res.render("updateCat", {title: "Update Category", category});
+    res.render("categoryViews/updateCat", {title: "Update Category", category});
 }
 
 //POST - handle update form
@@ -78,7 +78,7 @@ async function categoryDeleteGET(req,res) {
         });
     }
 
-    res.render("categoryDelete", {categoryData});
+    res.render("categoryViews/deleteCategory", {categoryData});
 }
 
 //POST - handle delete

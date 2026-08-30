@@ -7,17 +7,17 @@
 </head>
 <body>
     <h1>Create Item</h1>
-    <form action="/create" method="POST">
+    <form action="/item/create" method="POST">
         <label for="itmName">Item Name: </label>
-        <input type="text" name="itmName" id="itmName" required>
+        <input type="text" name="name" id="itmName" required>
         <label for="itmDesc">Item Description: </label>
-        <textarea name="itmDesc" id="itmDesc"></textarea>
+        <textarea name="description" id="itmDesc"></textarea>
         <label for="itmPrice">Item Price:</label>
-        <input type="number" name="itmPrice" id="itmPrice">
+        <input type="number" name="price" id="itmPrice">
         <label for="category_id">Category ID</label>
         <select name="category_id" id="category_id" required>
             <% categories.forEach(cat => { %>
-                <option value="<%= cat.id %>"><%= cat.name ></option>
+                <option value="<%= cat.id %>"><%= cat.name %></option>
             <% }) %>
         </select>
         <button type="submit">Submit</button>

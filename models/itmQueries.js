@@ -54,3 +54,12 @@ async function deleteItm(itmId) {
     const{rows} = await pool.query(`DELETE FROM item WHERE item.id = $1 RETURNING *`, [itmId]);
     return rows[0];
 }
+
+module.exports = {
+    listAllItm,
+    listItem,
+    getItemsByCategory,
+    createItm,
+    updateItm,
+    deleteItm
+};
