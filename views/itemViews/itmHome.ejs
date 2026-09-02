@@ -4,26 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/lists.css">
 </head>
 <body>
-    <h1>All Items</h1>
 
-    <a href="/item/create">Create New Item</a>
+    <div class="page">
+        
+        <h1>All Items</h1>
 
-    <ul>
-        <% items.forEach(itm => { %>
-            <li>
-                <strong><%= itm.name %></strong> - <%= itm.description %>
-                (<%= itm.price %> gold)
+        <a href="/item/create" class="btn lrg">Create New Item</a>
 
-                <a href="/item/<%=itm.id%>">Detail</a>
-                <a href="/item/<%=itm.id%>/update">Update</a>
-                <a href="/item/<%=itm.id%>/delete">Delete</a>
+        <ul>
+            <% items.forEach(itm => { %>
+                <li>
+                    <strong><%= itm.name %></strong>
+                    <%= itm.price %> gold
 
-            </li>
-        <% }) %>
-    </ul>
+                    <a class="btn small" href="/item/<%=itm.id%>">Detail</a>
+                    <a class="btn small" href="/item/<%=itm.id%>/update">Update</a>
+                    <a class="btn small" href="/item/<%=itm.id%>/delete">Delete</a>
 
-    <a href="/category">Back to Categories</a>
+                </li>
+            <% }) %>
+        </ul>
+
+        <a href="/category" class="btn small">Back to Categories</a>
+
+    </div>
+    
 </body>
 </html>

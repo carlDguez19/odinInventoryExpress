@@ -4,26 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/lists.css">
 </head>
 <body>
 
-    <h1>All Categories</h1>
+    <div class="page">
+        
+        <h1>All Categories</h1>
 
-    <a href="/category/create">Create New Category</a>
+        <a href="/category/create" class="btn lrg">Create New Category</a>
 
-    <ul>
-        <% categories.forEach(cat => { %>
-            <li>
-                <strong><%= cat.name %></strong> - <%= cat.description %>
+        <ul>
+            <% categories.forEach(cat => { %>
+                <li>
 
-                <a class="btnSmall" href="/category/<%= cat.id %>">Detail</a>
-                <a class="btnSmall" href="/category/<%= cat.id %>/update">Update</a>
-                <a class="btnSmall" href="/category/<%= cat.id %>/delete">Delete</a>
+                    <div class="catName">
+                        <strong><%= cat.name %></strong>
+                    </div>
 
-            </li>
-        <% }) %>
-    </ul>
+                    <div class="actions">
+                        <a class="btn small" href="/category/<%= cat.id %>">Detail</a>
+                        <a class="btn small" href="/category/<%= cat.id %>/update">Update</a>
+                        <a class="btn small" href="/category/<%= cat.id %>/delete">Delete</a>
+                    </div>
 
-    <a href="/item">Back to Items</a>
+                </li>
+            <% }) %>
+        </ul>
+
+        <a href="/item" class="btn small">Back to Items</a>
+    
+    </div>
+
 </body>
 </html>

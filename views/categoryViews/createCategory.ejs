@@ -4,16 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/forms.css">
 </head>
 <body>
-    <h1>Create Category</h1>
-    <form action="/category/create" method="POST">
-        <label for="catName">Category Name: </label>
-        <input type="text" name="name" id="catName" required>
-        <label for="catDesc">Category Description: </label>
-        <textarea name="description" id="catDesc"></textarea>
-        <button type="submit">Submit</button>
-    </form>
+    
+    <div class="page">
+        
+        <h1>Create Category</h1>
+
+        <form action="/category/create" method="POST">
+            
+            <label for="catName">Category Name: </label>
+            <input type="text" name="name" id="catName" maxlength="10" required>
+            
+            <label for="catDesc">Category Description: </label>
+            <textarea name="description" id="catDesc"></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+
+        <a href="/category" class="cancelBtn">Cancel</a>
+    
+    </div>
+
 </body>
 </html>
 

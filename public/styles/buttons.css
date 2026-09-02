@@ -1,0 +1,38 @@
+button{
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cancelBtn{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn{
+    margin: 1rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.6rem;
+    background: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.small{
+    padding: 0.3rem 0.6rem;
+}
+
+.lrg{
+    padding: 0.7rem 1.2rem;
+}

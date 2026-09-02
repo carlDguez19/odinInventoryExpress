@@ -4,33 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/lists.css">
 </head>
 <body>
+    
+    <div class="page">
 
-    <h1><%= category.name %></h1>
-    <p><%= category.description %></p>
+        <h1><%= category.name %></h1>
+        
+        <p><%= category.description %></p>
 
-    <h2>Items in this Category</h2>
-    <% if (items.length === 0) {%>
-        <p>No items in this category</p>
-    <% }else{ %>
-        <ul>
-            <% items.forEach(item => { %>
-                <li>
-                    <strong><%= item.name %></strong> - <%= item.description %>
-                    (<%= item.price %> gold)
+        <h2>Items in this Category</h2>
+        <% if (items.length === 0) {%>
+            <p>No items in this category</p>
+        <% }else{ %>
+            <ul>
+                <% items.forEach(item => { %>
+                    <li>
+                        <strong><%= item.name %></strong> - <%= item.description %>
+                        (<%= item.price %> gold)
 
-                    <a href="/item/<%= item.id%>">Detail</a>
-                    <a href="/item/<%= item.id%>/update">Update</a>
-                    <a href="/item/<%= item.id%>/delete">Delete</a>
+                        <a class="btn small" href="/item/<%= item.id%>">Detail</a>
+                        <a class="btn small" href="/item/<%= item.id%>/update">Update</a>
+                        <a class="btn small" href="/item/<%= item.id%>/delete">Delete</a>
 
-                </li>
-            <% }) %>
-        </ul>
-    <% } %>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
 
-    <a href="/category">
-        Back to Categories
-    </a>
+        <a href="/category" class="btn small">Back to Categories</a>
+
+    </div>
+
 </body>
 </html>

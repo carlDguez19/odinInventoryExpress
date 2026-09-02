@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/buttons.css">
+    <link rel="stylesheet" href="/styles/forms.css">
 </head>
 <body>
 
-    <h1>Update Category</h1>
+    <div class="page">
 
-    <form action="/category/<%= category.id %>/update" method="POST">
-        
-        <label for="catName">Category Name:</label>
-        <input type="text" id="catName" name="name" value="<%= category.name %>" required>
+        <h1>Update Category</h1>
 
-        <label for="catDesc">Category Description:</label>
-        <textarea name="description" id="catDesc"><%= category.description %></textarea>
+        <form action="/category/<%= category.id %>/update" method="POST">
+            
+            <label for="catName">Category Name:</label>
+            <input type="text" id="catName" name="name" value="<%= category.name %>" required>
 
-        <button type="submit">Update</button>
-    </form>
+            <label for="catDesc">Category Description:</label>
+            <textarea name="description" id="catDesc"><%= category.description %></textarea>
 
-    <a href="/category">Cancel</a>
+            <button type="submit">Update</button>
+        </form>
+
+        <a href="/category" class="cancelBtn">Cancel</a>
+    
+    </div>
+
 </body>
 </html>
