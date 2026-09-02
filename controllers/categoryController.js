@@ -28,13 +28,12 @@ async function catList(req,res,next){
 async function oneCatList(req,res,next) {
     try{
         const categoryId = req.params.id;
-
-        if(!categoryId){
+        const category = await categoryModel.listOneCat(categoryId);
+        if(!category || category.length === 0){
             const error = new Error("Category not found");
             error.status = 404;
             throw error;
         }
-        const category = await categoryModel.listOneCat(categoryId);
         const items = await itemModel.getItemsByCategory(categoryId);
 
         res.render("categoryViews/catDetail", {category, items});
@@ -77,13 +76,12 @@ async function categoryCreatePOST(req,res,next) {
 async function categoryUpdateGET(req,res,next) {
     try{
         const categoryId = req.params.id;
-        if(!categoryId){
+        const category = await categoryModel.listOneCat(categoryId);
+        if(!category){
             const error = new Error("Category not found");
             error.status = 404;
             throw error;
         }
-        const category = await categoryModel.listOneCat(categoryId);
-
         res.render("categoryViews/updateCat", {title: "Update Category", category});
     }catch(err){
         next(err);
@@ -94,18 +92,17 @@ async function categoryUpdateGET(req,res,next) {
 async function categoryUpdatePOST(req,res,next) {
     try{
         const categoryId = req.params.id;
-
-        if(!categoryId){
-            const error = new Error("Category not found");
-            error.status = 404;
-            throw error;
-        }
         const updatedCat = {
             name: req.body.name,
             description: req.body.description,
         }
 
         const updated = await categoryModel.updateCat(categoryId, updatedCat);
+        if(!updated){
+            const error = new Error("Category not found");
+            error.status = 404;
+            throw error;
+        }
         res.redirect(`/category/${updated.id}`);
     }catch(err){
         next(err);
@@ -116,12 +113,12 @@ async function categoryUpdatePOST(req,res,next) {
 async function categoryDeleteGET(req,res,next) {
     try{
         const categoryId = req.params.id;
-        if(!categoryId){
+        const category = await categoryModel.listOneCat(categoryId);
+        if(!category || category.length === 0){
             const error = new Error("Category not found");
             error.status = 404;
             throw error;
         }
-        const categoryData = await categoryModel.listOneCat(categoryId);
         const items = await itemModel.getItemsByCategory(categoryId);
 
         if(items.length > 0){
@@ -130,7 +127,7 @@ async function categoryDeleteGET(req,res,next) {
             });
         }
 
-        res.render("categoryViews/deleteCategory", {categoryData});
+        res.render("categoryViews/deleteCategory", {category});
     }catch(err){
         next(err);
     }
@@ -140,17 +137,11 @@ async function categoryDeleteGET(req,res,next) {
 async function categoryDeletePOST(req,res,next) {
     try{    
         const categoryId = req.params.id;
-        if(!categoryId){
-            const error = new Error("Category not found");
-            error.status = 404;
-            throw error;
-        }
         await categoryModel.deleteCat(categoryId);
+
         res.redirect("/category");
     }catch(err){
-        res.render("categoryDeleteBlocked", {
-            message: "Cannot delete this caategory because items are still assigned to it."
-        })
+        next(err)
     }
 }
 
