@@ -22,3 +22,17 @@ app.listen(PORT, (error) => {
   }
   console.log(`Express app listening on port ${PORT}!`);
 });
+
+app.use((req,res,next) => {
+  const error = new Error("Page not found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).render("error", {
+    message: err.message,
+    status: err.status || 500
+  });
+});
