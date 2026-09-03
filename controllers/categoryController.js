@@ -77,7 +77,7 @@ async function categoryUpdateGET(req,res,next) {
     try{
         const categoryId = req.params.id;
         const category = await categoryModel.listOneCat(categoryId);
-        if(!category){
+        if(!category || category.length === 0){
             const error = new Error("Category not found");
             error.status = 404;
             throw error;
@@ -99,8 +99,8 @@ async function categoryUpdatePOST(req,res,next) {
 
         const updated = await categoryModel.updateCat(categoryId, updatedCat);
         if(!updated){
-            const error = new Error("Category not found");
-            error.status = 404;
+            const error = new Error("Category update failed");
+            error.status = 400;
             throw error;
         }
         res.redirect(`/category/${updated.id}`);
@@ -116,15 +116,15 @@ async function categoryDeleteGET(req,res,next) {
         const category = await categoryModel.listOneCat(categoryId);
         if(!category || category.length === 0){
             const error = new Error("Category not found");
-            error.status = 404;
+            error.status = 400;
             throw error;
         }
         const items = await itemModel.getItemsByCategory(categoryId);
 
         if(items.length > 0){
-            return res.render("categoryDeleteBlocked", {
-                message: "This category has items and cannot be deleted."
-            });
+            const error = new Error("Category contains items. Can not be deleted. Relocate items first");
+            error.status = 400;
+            throw error;
         }
 
         res.render("categoryViews/deleteCategory", {category});

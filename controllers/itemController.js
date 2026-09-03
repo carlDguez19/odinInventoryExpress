@@ -15,70 +15,134 @@ const categoryModel = require("../models/catQueries.js")
 // | 1      | healing | loremIpsum...| 20g   | 1           |
 // | ...                                                   |
 
-async function itemList(req, res) {
-    const items = await itemModel.listAllItm();
-    res.render("itemViews/itmHome", {items});
+async function itemList(req,res,next) {
+    try{
+        const items = await itemModel.listAllItm();
+        res.render("itemViews/itmHome", {items});
+    }catch(err){
+        next(err);
+    }
 }
 
-async function itemDetail(req,res) {
-    const item_id = req.params.id;
-    const itemDet = await itemModel.listItem(item_id);
-    res.render("itemViews/itmDetail", {itemDet});
+async function itemDetail(req,res,next) {
+    try{
+        const item_id = req.params.id;
+        const item = await itemModel.listItem(item_id);
+        if(!item){
+            const error = new Error("Item not found");
+            error.status = 404;
+            throw error;
+        }
+
+        res.render("itemViews/itmDetail", {item});
+    }catch(err){
+        next(err);
+    }
 }
 
-async function itemCreateGET(req,res){
-    const categories = await categoryModel.listAllCat();
-    res.render("itemViews/createItem", {title: "Create Item", categories});
-}
-
-async function itemCreatePOST(req,res) {
-    const newItem = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        category_id: req.body.category_id,
+async function itemCreateGET(req,res,next){
+    try{
+        const categories = await categoryModel.listAllCat();
+        if(!categories || categories.length === 0){
+            const error = new Error("No category to store item. Create a category first");
+            error.status = 400;
+            throw error;
+        }
+        res.render("itemViews/createItem", {title: "Create Item", categories});
+    }catch(err){
+        next(err);
     }
 
-    const created = await itemModel.createItm(newItem);
-    res.redirect(`/item/${created.id}`);
 }
 
-async function itemUpdateGET(req,res) {
-    const item_id = req.params.id;
-    const item = await itemModel.listItem(item_id);
-    const categories = await categoryModel.listAllCat();
-    res.render("itemViews/updateItem", {title: "Update Item", item, categories});
-}
+async function itemCreatePOST(req,res,next) {
+    try{
+        const newItem = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category_id: req.body.category_id,
+        }
 
-async function itemUpdatePOST(req,res) {
-    const itemId = req.params.id;
-
-    const updatedItem = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        category_id: req.body.category_id
+        const created = await itemModel.createItm(newItem);
+        if(!created){
+            const error = new Error("Iten was not created")
+            error.status = 400;
+            throw error;
+        }
+        res.redirect(`/item/${created.id}`);
+    }catch(err){
+        next(err);
     }
-
-    const updated = await itemModel.updateItm(itemId, updatedItem);
-    res.redirect(`/item/${updated.id}`);
 }
 
-async function itemDeleteGET(req,res) {
+async function itemUpdateGET(req,res,next) {
+    try{
+        const item_id = req.params.id;
+        const item = await itemModel.listItem(item_id);
+        if(!item){
+            const error = new Error("Item not found");
+            error.status = 404;
+            throw error;
+        }
+        const categories = await categoryModel.listAllCat();
+        if(!categories || categories.length === 0){
+            const error = new Error("No category to store item. Create a category first");
+            error.status = 400;
+            throw error;
+        }
+        res.render("itemViews/updateItem", {title: "Update Item", item, categories});
+    }catch(err){
+        next(err);
+    }
+}
+
+async function itemUpdatePOST(req,res,next) {
+    try{
         const itemId = req.params.id;
-        const itemData = await itemModel.listItem(itemId);
-    
-        res.render("itemViews/deleteItem", {itemData});
+
+        const updatedItem = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category_id: req.body.category_id
+        }
+
+        const updated = await itemModel.updateItm(itemId, updatedItem);
+        if(!updated){
+            const error = new Error("Item failed to update");
+            error.status = 400;
+            throw error;
+        }
+        res.redirect(`/item/${updated.id}`);
+    }catch(err){
+        next(err);
+    }
 }
 
-async function itemDeletePOST(req,res) {
+async function itemDeleteGET(req,res,next) {
+    try{
+        const itemId = req.params.id;
+        const item = await itemModel.listItem(itemId);
+        if(!item){
+            const error = new Error("Item not found");
+            error.status = 404;
+            throw error;
+        }
+    
+        res.render("itemViews/deleteItem", {item});
+    }catch(err){
+        next(err);
+    }
+}
+
+async function itemDeletePOST(req,res,next) {
     try{
         const itemId = req.params.id;
         await itemModel.deleteItm(itemId);
         res.redirect("/item");
     }catch (err){
-        console.error("Delete error: ", err);
-        res.status(500).send("Error deleting item");
+        next(err);
     }
 }
 
