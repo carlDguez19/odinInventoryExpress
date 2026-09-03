@@ -66,7 +66,7 @@ async function itemCreatePOST(req,res,next) {
 
         const created = await itemModel.createItm(newItem);
         if(!created){
-            const error = new Error("Iten was not created")
+            const error = new Error("Item was not created")
             error.status = 400;
             throw error;
         }
@@ -139,7 +139,12 @@ async function itemDeleteGET(req,res,next) {
 async function itemDeletePOST(req,res,next) {
     try{
         const itemId = req.params.id;
-        await itemModel.deleteItm(itemId);
+        const deleted = await itemModel.deleteItm(itemId);
+        if(!deleted){
+            const error = new Error("Item deletion failed");
+            error.status = 400;
+            throw error;
+        }
         res.redirect("/item");
     }catch (err){
         next(err);
