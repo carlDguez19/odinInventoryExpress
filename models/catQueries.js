@@ -1,3 +1,5 @@
+// DATA ACCESS FOR CATEGORY: Handles all SQL queries related to categories
+
 // Table: category
 // +--------+---------+--------------+
 // | id(pk) | name    | description  |
@@ -11,6 +13,8 @@
 // +--------+---------+--------------+-------+-------------+
 // | 1      | healing | loremIpsum...| 20g   | 1           |
 // | ...                                                   |
+
+// All queries use RETURNING. This is to confirm CRUD.
 
 const pool = require("./pool")
 
