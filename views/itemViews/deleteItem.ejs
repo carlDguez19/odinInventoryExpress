@@ -15,9 +15,9 @@
 
         <h1>Delete Item</h1>
 
-        <p>Are you sure you want to delete "<%= itemData.name%>"?</p>
+        <p>Are you sure you want to delete "<%= item.name%>"?</p>
         
-        <form action="/item/<%= itemData.id %>/delete" method="POST">
+        <form action="/item/<%= item.id %>/delete" method="POST">
             <button type="submit">Yes</button>
         </form>
 

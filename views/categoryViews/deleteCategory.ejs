@@ -15,9 +15,9 @@
 
         <h1>Delete Category</h1>
 
-        <p>Are you sure you want to delete the "<%= categoryData.name%>" category?</p>
+        <p>Are you sure you want to delete the "<%= category.name%>" category?</p>
         
-        <form action="/category/<%= categoryData.id %>/delete" method="POST">
+        <form action="/category/<%= category.id %>/delete" method="POST">
             <button type="submit">Yes</button>
         </form>
 
