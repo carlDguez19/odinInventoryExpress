@@ -26,7 +26,7 @@ async function catList(req,res,next){
         const categories = await categoryModel.listAllCat();
 
         // render category home page. Route - "/"
-        res.render("categoryViews/catHome", {categories});
+        res.render("categoryViews/catHome", {title: "Category Home", categories});
     }catch(err){
         next(err);
     }
@@ -52,7 +52,7 @@ async function oneCatList(req,res,next) {
         const items = await itemModel.getItemsByCategory(categoryId);
 
         //render detail page
-        res.render("categoryViews/catDetail", {category, items});
+        res.render("categoryViews/catDetail", {title: "Category Detail", category, items});
     }catch(err){
         next(err);
     }
@@ -167,7 +167,7 @@ async function categoryDeleteGET(req,res,next) {
         }
 
         // render category deletion confirmation
-        res.render("categoryViews/deleteCategory", {category});
+        res.render("categoryViews/deleteCategory", {title: "Category Delete", category});
     }catch(err){
         next(err);
     }

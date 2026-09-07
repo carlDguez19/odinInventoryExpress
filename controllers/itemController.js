@@ -22,7 +22,7 @@ async function itemList(req,res,next) {
         const items = await itemModel.listAllItm();
         
         // render item home page
-        res.render("itemViews/itmHome", {items});
+        res.render("itemViews/itmHome", {title: "Item Home", items});
     }catch(err){
         next(err);
     }
@@ -44,7 +44,7 @@ async function itemDetail(req,res,next) {
         }
 
         // render item detail page
-        res.render(`itemViews/itmDetail`, {itemDet});
+        res.render(`itemViews/itmDetail`, {title: "Item Detail", itemDet});
     }catch(err){
         next(err);
     }
@@ -178,7 +178,7 @@ async function itemDeleteGET(req,res,next) {
         }
     
         // render delete confirmation
-        res.render("itemViews/deleteItem", {item});
+        res.render("itemViews/deleteItem", {title: "Delete Item",item});
     }catch(err){
         next(err);
     }
