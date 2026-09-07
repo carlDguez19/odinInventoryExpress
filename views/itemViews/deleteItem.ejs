@@ -18,10 +18,13 @@
         <p>Are you sure you want to delete "<%= item.name%>"?</p>
         
         <form action="/item/<%= item.id %>/delete" method="POST">
-            <button type="submit">Yes</button>
+    
+            <div class="formButtons">
+                <button type="submit">Yes</button>
+                <a href="/item" class="cancelBtn">Cancel</a>
+            </div>
+    
         </form>
-
-        <a href="/item" class="cancelBtn">Cancel</a>
         
     </div>
 

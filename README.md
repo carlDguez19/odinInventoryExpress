@@ -58,11 +58,11 @@ Method	Route	Description
 GET	/category	List all categories
 GET	/category/:id	Category detail
 GET	/category/create	Create form
-POST	/category/create	Create category
+POST /category/create	Create category
 GET	/category/:id/update	Update form
-POST	/category/:id/update	Update category
+POST /category/:id/update	Update category
 GET	/category/:id/delete	Delete confirmation
-POST	/category/:id/delete	Delete category
+POST /category/:id/delete	Delete category
 
 
 ### Items
@@ -70,11 +70,11 @@ Method	Route	Description
 GET	/item	List all items
 GET	/item/:id	Item detail
 GET	/item/create	Create form
-POST	/item/create	Create item
+POST /item/create	Create item
 GET	/item/:id/update	Update form
-POST	/item/:id/update	Update item
+POST /item/:id/update	Update item
 GET	/item/:id/delete	Delete confirmation
-POST	/item/:id/delete	Delete item
+POST /item/:id/delete	Delete item
 
 ---
 

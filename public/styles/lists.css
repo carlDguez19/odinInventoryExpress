@@ -29,4 +29,22 @@ li{
     margin-left: auto;
     display: flex;
     align-items: center;
+    padding: 1.2rem;
+}
+
+@media (max-width: 768px){
+    li{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .itmName, .price, .actions, .catName{
+        margin: auto;
+    }
+
+    .actions{
+        flex-direction: column;
+    }
 }

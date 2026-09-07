@@ -23,10 +23,12 @@
             <label for="catDesc">Category Description:</label>
             <textarea name="description" id="catDesc"><%= category.description %></textarea>
 
-            <button type="submit">Update</button>
-        </form>
+            <div class="formButtons">
+                <button type="submit">Update</button>
+                <a href="/category" class="cancelBtn">Cancel</a>
+            </div>
 
-        <a href="/category" class="cancelBtn">Cancel</a>
+        </form>
     
     </div>
 

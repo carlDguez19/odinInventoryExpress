@@ -24,12 +24,19 @@
             <ul>
                 <% items.forEach(item => { %>
                     <li>
-                        <strong><%= item.name %></strong> - <%= item.description %>
-                        (<%= item.price %> gold)
+                        <div class="itmName">
+                            <strong><%= item.name %></strong>
+                        </div>
 
-                        <a class="btn small" href="/item/<%= item.id%>">Detail</a>
-                        <a class="btn small" href="/item/<%= item.id%>/update">Update</a>
-                        <a class="btn small" href="/item/<%= item.id%>/delete">Delete</a>
+                        <div class="price">
+                            <%= item.price %> gold
+                        </div>
+
+                        <div class="actions">
+                            <a class="btn small" href="/item/<%= item.id%>">Detail</a>
+                            <a class="btn small" href="/item/<%= item.id%>/update">Update</a>
+                            <a class="btn small" href="/item/<%= item.id%>/delete">Delete</a>
+                        </div>
 
                     </li>
                 <% }) %>

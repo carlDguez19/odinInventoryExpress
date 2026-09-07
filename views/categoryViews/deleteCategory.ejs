@@ -18,10 +18,13 @@
         <p>Are you sure you want to delete the "<%= category.name%>" category?</p>
         
         <form action="/category/<%= category.id %>/delete" method="POST">
-            <button type="submit">Yes</button>
-        </form>
+            
+            <div class="formButtons">
+                <button type="submit">Yes</button>
+                <a href="/category" class="cancelBtn">Cancel</a>
+            </div>
 
-        <a href="/category" class="cancelBtn">Cancel</a>
+        </form>
     
     </div>
 
