@@ -83,6 +83,32 @@ async function itemCreatePOST(req,res,next) {
             category_id: req.body.category_id,
         }
 
+        newItem.name = newItem.name?.trim();
+
+        if (!newItem.name) {
+            const error = new Error("Item name is required");
+            error.status = 400;
+            throw error;
+        }
+
+        const price = req.body.price;
+        const parsedPrice = Number(price);
+        
+        if (
+            price === undefined ||
+            price.trim() === "" ||
+            !Number.isFinite(parsedPrice) ||
+            parsedPrice < 0
+        ) {
+            const error = new Error(
+                "Price must be a valid, non-negative number"
+            );
+            error.status = 400;
+            throw error;
+        }
+        
+        newItem.price = parsedPrice;
+
         //insert into database and return newly created item
         const created = await itemModel.createItm(newItem);
 
